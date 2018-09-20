@@ -2,4 +2,7 @@ spring:
   application:
     admin:
       enabled: true
-say: '你好'
+    name: demo
+logging:
+  level:
+    root: DEBUG

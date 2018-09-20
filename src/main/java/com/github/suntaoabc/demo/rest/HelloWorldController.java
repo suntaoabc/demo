@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
-    @Value("${say}")
-    private String say;
 
     @GetMapping(path = "/home", produces = "application/json")
     public String home() {
-        return '[' + say + ']';
+        return "{\"rspCode\": 0}";
     }
 }
