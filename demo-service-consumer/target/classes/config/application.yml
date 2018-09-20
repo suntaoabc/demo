@@ -1,0 +1,15 @@
+spring:
+  application:
+    admin:
+      enabled: true
+    name: demo-service-consumer
+logging:
+  level:
+    root: DEBUG
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8672/eureka/

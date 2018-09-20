@@ -10,6 +10,9 @@ spring:
     admin:
       enabled: true
     name: demo-eureka-server-1
+logging:
+  level:
+    root: DEBUG
 
 server:
   port: 8761
