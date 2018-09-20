@@ -2,7 +2,7 @@ spring:
   application:
     admin:
       enabled: true
-    name: demo
+    name: demo-eureka-server
 logging:
   level:
     root: DEBUG
