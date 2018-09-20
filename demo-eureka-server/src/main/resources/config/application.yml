@@ -1,11 +1,15 @@
-spring:
-  application:
-    admin:
-      enabled: true
-    name: demo
+
 logging:
   level:
     root: DEBUG
+
+---
+spring:
+  profiles: peer1
+  application:
+    admin:
+      enabled: true
+    name: demo-eureka-server-1
 
 server:
   port: 8761
@@ -18,4 +22,25 @@ eureka:
     register-with-eureka: false
     fetch-registry: true
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8672/eureka/
+
+---
+spring:
+  profiles: peer2
+  application:
+    admin:
+      enabled: true
+    name: demo-eureka-server-2
+
+server:
+  port: 8762
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8671/eureka/
