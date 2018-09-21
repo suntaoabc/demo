@@ -1,7 +1,11 @@
 spring:
   application:
     admin:
+<<<<<<< HEAD
       enabled: false
+=======
+      enabled: true
+>>>>>>> refs/remotes/origin/dev
     name: demo-service-consumer
 logging:
   level:
