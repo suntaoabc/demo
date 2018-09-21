@@ -6,6 +6,9 @@ spring:
 logging:
   level:
     root: DEBUG
+ribbon:
+  eureka:
+    enabled: true
 
 eureka:
   client:

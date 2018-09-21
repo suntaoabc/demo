@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.suntao.demo.remote.HelloService;
 
+import java.util.Map;
+
 /**
  *
  * @author suntao
@@ -21,8 +23,7 @@ public class WorldController {
     private HelloService helloService;
 
     @GetMapping("/hello")
-    public String hello() {
-        helloService.hello();
-        return "hello";
+    public Map<String, String> hello() {
+        return helloService.hello();
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author suntao
  * @date 2018-09-20 19:59
  */
-@FeignClient("hello")
+@FeignClient("demo-service-provider")
 public interface HelloService {
     @RequestMapping("/hello")
     Map<String, String> hello();
