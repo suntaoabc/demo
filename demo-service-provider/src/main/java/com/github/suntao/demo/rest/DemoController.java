@@ -6,6 +6,7 @@ package com.github.suntao.demo.rest;
 
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +18,13 @@ import java.util.Map;
  * @date 2018-09-20 19:04
  */
 @RestController
+@RequestMapping("/provider")
 public class DemoController {
 
     @Value("${helloMessage}")
     private String provider;
 
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     public Map<String, String> hello() {
         Map<String, String> map = Maps.newHashMapWithExpectedSize(1);
         map.put("provider", provider);
