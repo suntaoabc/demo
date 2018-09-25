@@ -4,12 +4,6 @@
  */
 package com.github.suntao.demo.kafka;
 
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -18,6 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
+
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 /**
  * 不支持多次启动.
@@ -45,8 +46,9 @@ public class KafkaConsumerWrapper implements SmartLifecycle {
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.LongDeserializer.class);
+
         kafkaConsumer = new KafkaConsumer<>(props);
-        consumerThread = new Thread(new Runner(), "consumer thread");
+        this.consumerThread = new Thread(new Runner());
     }
 
     @Override
@@ -98,16 +100,19 @@ public class KafkaConsumerWrapper implements SmartLifecycle {
         @Override
         public void run() {
 
+
             kafkaConsumer.subscribe(Arrays.asList("streams-wordcount-output"));
 
             while (isRunning.get()) {
                 try {
                     ConsumerRecords<String, Long> records = kafkaConsumer.poll(Duration.ofMillis(100L));
+
                     if (records.isEmpty()) {
                         continue;
                     }
 
                     records.iterator().forEachRemaining(record -> LOGGER.info("receive message: {}->{}", record.key(), record.value()));
+
                 } catch (WakeupException e) {
                     // ignore
                 } catch (Exception e) {
