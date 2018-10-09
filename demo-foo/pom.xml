@@ -34,16 +34,15 @@
                 </exclusion>
             </exclusions>
         </dependency>-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
-
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
