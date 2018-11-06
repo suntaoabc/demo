@@ -1,4 +1,11 @@
 spring:
   application:
     name: demo-foo
-debug: true
+  datasource:
+    username: root
+    password: tiger
+    url: jdbc:mysql://localhost:3306/answer
+    driver-class-name: com.mysql.jdbc.Driver
+debug: false
+server:
+  context-path: /foo

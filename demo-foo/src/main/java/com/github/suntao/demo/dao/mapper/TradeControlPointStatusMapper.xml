@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.suntao.demo.dao.mapper.TradeControlPointStatusMapper">
+  <resultMap id="BaseResultMap" type="com.github.suntao.demo.dao.dataobject.TradeControlPointStatusDO">
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="pay_freight_button" jdbcType="TINYINT" property="payFreightButton" />
+    <result column="pay_deposit_button" jdbcType="TINYINT" property="payDepositButton" />
+    <result column="raise_contract_button" jdbcType="TINYINT" property="raiseContractButton" />
+    <result column="confirm_contract_button" jdbcType="TINYINT" property="confirmContractButton" />
+    <result column="confirm_received_button" jdbcType="TINYINT" property="confirmReceivedButton" />
+    <result column="comment_driver_button" jdbcType="TINYINT" property="commentDriverButton" />
+    <result column="comment_consignor_button" jdbcType="TINYINT" property="commentConsignorButton" />
+    <result column="upload_receipt_button" jdbcType="TINYINT" property="uploadReceiptButton" />
+    <result column="confirm_load_cargo_button" jdbcType="TINYINT" property="comfirmLoadCargoButton" />
+    <result column="driver_confirm_contract_button" jdbcType="TINYINT" property="driverConfirmContractButton" />
+    <result column="owner_confirm_contract_button" jdbcType="TINYINT" property="ownerConfirmContractButton" />
+    <result column="driver_upload_receipt_button" jdbcType="TINYINT" property="driverUploadReceiptButton" />
+    <result column="owner_upload_receipt_button" jdbcType="TINYINT" property="ownerUploadReceiptButton" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, pay_freight_button, pay_deposit_button, raise_contract_button, confirm_contract_button, 
+    confirm_received_button, comment_driver_button, comment_consignor_button, upload_receipt_button, 
+    confirm_load_cargo_button, driver_confirm_contract_button, owner_confirm_contract_button, 
+    driver_upload_receipt_button, owner_upload_receipt_button
+  </sql>
+  <select id="findByOrderId" parameterType="long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+      from im_trade_control_point_status
+     where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="com.github.suntao.demo.dao.dataobject.TradeControlPointStatusDO">
+    insert into im_trade_control_point_status (order_id, pay_freight_button, pay_deposit_button, 
+      raise_contract_button, confirm_contract_button, 
+      confirm_received_button, comment_driver_button, 
+      comment_consignor_button, upload_receipt_button, 
+      confirm_load_cargo_button, driver_confirm_contract_button, 
+      owner_confirm_contract_button, driver_upload_receipt_button, 
+      owner_upload_receipt_button, create_time, update_time)
+    values (#{orderId,jdbcType=BIGINT}, #{payFreightButton,jdbcType=TINYINT}, #{payDepositButton,jdbcType=TINYINT}, 
+      #{raiseContractButton,jdbcType=TINYINT}, #{confirmContractButton,jdbcType=TINYINT}, 
+      #{confirmReceivedButton,jdbcType=TINYINT}, #{commentDriverButton,jdbcType=TINYINT}, 
+      #{commentConsignorButton,jdbcType=TINYINT}, #{uploadReceiptButton,jdbcType=TINYINT}, 
+      #{comfirmLoadCargoButton,jdbcType=TINYINT}, #{driverConfirmContractButton,jdbcType=TINYINT},
+      #{ownerConfirmContractButton,jdbcType=TINYINT}, #{driverUploadReceiptButton,jdbcType=TINYINT}, 
+      #{ownerUploadReceiptButton,jdbcType=TINYINT}, now(), now())
+  </insert>
+
+  <update id="updateByExample" parameterType="com.github.suntao.demo.dao.dataobject.TradeControlPointStatusDO">
+    update im_trade_control_point_status
+       set order_id = #{orderId,jdbcType=BIGINT},
+           pay_freight_button = #{payFreightButton,jdbcType=TINYINT},
+           pay_deposit_button = #{payDepositButton,jdbcType=TINYINT},
+           raise_contract_button = #{raiseContractButton,jdbcType=TINYINT},
+           confirm_contract_button = #{confirmContractButton,jdbcType=TINYINT},
+           confirm_received_button = #{confirmReceivedButton,jdbcType=TINYINT},
+           comment_driver_button = #{commentDriverButton,jdbcType=TINYINT},
+           comment_consignor_button = #{commentConsignorButton,jdbcType=TINYINT},
+           upload_receipt_button = #{uploadReceiptButton,jdbcType=TINYINT},
+           confirm_load_cargo_button = #{comfirmLoadCargoButton,jdbcType=TINYINT},
+           driver_confirm_contract_button = #{driverConfirmContractButton,jdbcType=TINYINT},
+           owner_confirm_contract_button = #{ownerConfirmContractButton,jdbcType=TINYINT},
+           driver_upload_receipt_button = #{driverUploadReceiptButton,jdbcType=TINYINT},
+           owner_upload_receipt_button = #{ownerUploadReceiptButton,jdbcType=TINYINT},
+           update_time = now()
+     where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>

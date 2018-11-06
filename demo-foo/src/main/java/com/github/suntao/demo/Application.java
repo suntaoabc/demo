@@ -8,11 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- *
  * @author suntao
  * @date 2018-09-25 9:40
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.github.suntao.demo")
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
