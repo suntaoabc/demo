@@ -36,7 +36,7 @@ public class TradeCardStatusController {
     }
 
     @RequestMapping(value = "/{orderId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Response<TradeCardStatusDO> getControlPointStatus(@PathVariable("orderId") Long orderId) {
+    public Response<TradeCardStatusDO> getTradeCardStatus(@PathVariable("orderId") Long orderId) {
 
         TradeCardStatusDO tradeCardStatusDO = this.tradeCardStatusRepo.findTradeCardStatusByOrderId(orderId);
         return new Response<>(ResultCode.SUCCESS, tradeCardStatusDO);

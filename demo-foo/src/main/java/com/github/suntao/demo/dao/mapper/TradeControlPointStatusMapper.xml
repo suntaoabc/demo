@@ -49,8 +49,7 @@
 
   <update id="updateByExample" parameterType="com.github.suntao.demo.dao.dataobject.TradeControlPointStatusDO">
     update im_trade_control_point_status
-       set order_id = #{orderId,jdbcType=BIGINT},
-           pay_freight_button = #{payFreightButton,jdbcType=TINYINT},
+       set pay_freight_button = #{payFreightButton,jdbcType=TINYINT},
            pay_deposit_button = #{payDepositButton,jdbcType=TINYINT},
            raise_contract_button = #{raiseContractButton,jdbcType=TINYINT},
            confirm_contract_button = #{confirmContractButton,jdbcType=TINYINT},
