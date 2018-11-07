@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.suntao.demo.dao.mapper.TradeCardStatusMapper">
+  <resultMap id="BaseResultMap" type="com.github.suntao.demo.dao.dataobject.TradeCardStatusDO">
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="cargo_id" jdbcType="BIGINT" property="cargoId" />
+    <result column="consignor_user_id" jdbcType="BIGINT" property="consignorUserId" />
+    <result column="driver_user_id" jdbcType="BIGINT" property="driverUserId" />
+    <result column="deposit_money_amount" jdbcType="INTEGER" property="depositMoneyAmount" />
+    <result column="city_begin" jdbcType="VARCHAR" property="cityBegin" />
+    <result column="city_end" jdbcType="VARCHAR" property="cityEnd" />
+    <result column="cargo_weight" jdbcType="VARCHAR" property="cargoWeight" />
+    <result column="cargo_capacity" jdbcType="VARCHAR" property="cargoCapacity" />
+    <result column="cargo_car_type" jdbcType="VARCHAR" property="cargoCarType" />
+    <result column="cargo_car_length" jdbcType="VARCHAR" property="cargoCarLength" />
+    <result column="deposit_money_info" jdbcType="VARCHAR" property="depositMoneyInfo" />
+    <result column="order_status_info" jdbcType="VARCHAR" property="orderStatusInfo" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="upload_receipt" jdbcType="TINYINT" property="uploadReceipt" />
+    <result column="freight_money_info" jdbcType="VARCHAR" property="freightMoneyInfo" />
+    <result column="contract_status_info" jdbcType="VARCHAR" property="contractStatusInfo" />
+    <result column="way_status_info" jdbcType="VARCHAR" property="wayStatusInfo" />
+    <result column="trade_type_info" jdbcType="VARCHAR" property="lastGuideStepTradeRawStatusITradeType" />
+    <result column="change_module" jdbcType="VARCHAR" property="lastGuidStepTradeRawStatusTradeTChangeModule" />
+    <result column="changed_status" jdbcType="VARCHAR" property="lastGuidStepTradeRawStatusTradeTChangedStatus" />
+    <result column="freight_money_count" jdbcType="BIGINT" property="freightMoneyCount" />
+    <result column="raw_status_update_time" jdbcType="BIGINT" property="lastGuidStepTradeRawStatusUpdateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    order_id, cargo_id, consignor_user_id, driver_user_id, deposit_money_amount, city_begin, 
+    city_end, cargo_weight, cargo_car_type, cargo_car_length, deposit_money_info, freight_money_info, 
+    contract_status_info, way_status_info, trade_type_info, change_module, changed_status, 
+    freight_money_count, raw_status_update_time
+  </sql>
+  <select id="findByOrderId" parameterType="long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+      from im_trade_card_status
+     where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="com.github.suntao.demo.dao.dataobject.TradeCardStatusDO">
+    insert into im_trade_card_status (order_id, cargo_id, consignor_user_id, 
+      driver_user_id, deposit_money_amount, city_begin, 
+      city_end, cargo_weight, cargo_car_type, 
+      cargo_car_length, deposit_money_info, freight_money_info, 
+      contract_status_info, way_status_info, trade_type_info, 
+      change_module, changed_status, 
+      freight_money_count, raw_status_update_time,
+      create_time,update_time)
+    values (#{orderId,jdbcType=BIGINT}, #{cargoId,jdbcType=BIGINT}, #{consignorUserId,jdbcType=BIGINT}, 
+      #{driverUserId,jdbcType=BIGINT}, #{depositMoneyAmount,jdbcType=INTEGER}, #{cityBegin,jdbcType=VARCHAR}, 
+      #{cityEnd,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR}, #{cargoCarType,jdbcType=VARCHAR}, 
+      #{cargoCarLength,jdbcType=VARCHAR}, #{depositMoneyInfo,jdbcType=VARCHAR}, #{freightMoneyInfo,jdbcType=VARCHAR}, 
+      #{contractStatusInfo,jdbcType=VARCHAR}, #{wayStatusInfo,jdbcType=VARCHAR}, #{lastGuideStepTradeRawStatusITradeType,jdbcType=VARCHAR}, 
+      #{lastGuidStepTradeRawStatusTradeTChangeModule,jdbcType=VARCHAR}, #{lastGuidStepTradeRawStatusTradeTChangedStatus,jdbcType=VARCHAR}, 
+      #{freightMoneyCount,jdbcType=INTEGER}, #{rawStatusUpdateTime,jdbcType=BIGINT},
+      now(), now())
+  </insert>
+
+  <update id="updateByExample" parameterType="com.github.suntao.demo.dao.dataobject.TradeCardStatusDO">
+    <![CDATA[
+    <update im_trade_card_status
+       set order_id = #{orderId,jdbcType=BIGINT},
+           cargo_id = #{cargoId,jdbcType=BIGINT},
+           consignor_user_id = #{consignorUserId,jdbcType=BIGINT},
+           driver_user_id = #{driverUserId,jdbcType=BIGINT},
+           deposit_money_amount = #{depositMoneyAmount,jdbcType=INTEGER},
+           city_begin = #{cityBegin,jdbcType=VARCHAR},
+           city_end = #{cityEnd,jdbcType=VARCHAR},
+           cargo_weight = #{cargoWeight,jdbcType=VARCHAR},
+           cargo_car_type = #{cargoCarType,jdbcType=VARCHAR},
+           cargo_car_length = #{cargoCarLength,jdbcType=VARCHAR},
+           deposit_money_info = #{depositMoneyInfo,jdbcType=VARCHAR},
+           freight_money_info = #{freightMoneyInfo,jdbcType=VARCHAR},
+           contract_status_info = #{contractStatusInfo,jdbcType=VARCHAR},
+           way_status_info = #{wayStatusInfo,jdbcType=VARCHAR},
+           trade_type_info = #{lastGuideStepTradeRawStatusITradeType,jdbcType=VARCHAR},
+           change_module = #{lastGuidStepTradeRawStatusTradeTChangeModule,jdbcType=VARCHAR},
+           changed_status = #{lastGuidStepTradeRawStatusTradeTChangedStatus,jdbcType=VARCHAR},
+           freight_money_count = #{freightMoneyCount,jdbcType=INTEGER},
+           raw_status_update_time = #{rawStatusUpdateTime,jdbcType=BIGINT},
+           update_time = now()
+     where order_id = #{orderId,jdbcType=BIGINT}
+       and raw_status_update_time < #{relatedItemUpdateTime,jdbcType=BIGINT}
+        ]]>
+   </update>
+
+</mapper>
