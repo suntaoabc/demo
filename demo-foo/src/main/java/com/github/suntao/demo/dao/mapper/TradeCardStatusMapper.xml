@@ -29,9 +29,9 @@
 
   <sql id="Base_Column_List">
     order_id, cargo_id, consignor_user_id, driver_user_id, deposit_money_amount, city_begin, 
-    city_end, cargo_weight, cargo_car_type, cargo_car_length, deposit_money_info, freight_money_info, 
-    contract_status_info, way_status_info, trade_type_info, change_module, changed_status, 
-    freight_money_count, raw_status_update_time
+    city_end, cargo_weight, cargo_capacity, cargo_car_type, cargo_car_length, deposit_money_info, order_status_info,
+    order_status, upload_receipt, freight_money_info, contract_status_info, way_status_info, trade_type_info,
+    change_module, changed_status, freight_money_count, raw_status_update_time
   </sql>
   <select id="findByOrderId" parameterType="long" resultMap="BaseResultMap">
     select
@@ -41,18 +41,16 @@
   </select>
 
   <insert id="insert" parameterType="com.github.suntao.demo.dao.dataobject.TradeCardStatusDO">
-    insert into im_trade_card_status (order_id, cargo_id, consignor_user_id, 
-      driver_user_id, deposit_money_amount, city_begin, 
-      city_end, cargo_weight, cargo_car_type, 
-      cargo_car_length, deposit_money_info, freight_money_info, 
-      contract_status_info, way_status_info, trade_type_info, 
-      change_module, changed_status, 
-      freight_money_count, raw_status_update_time,
-      create_time,update_time)
-    values (#{orderId,jdbcType=BIGINT}, #{cargoId,jdbcType=BIGINT}, #{consignorUserId,jdbcType=BIGINT}, 
-      #{driverUserId,jdbcType=BIGINT}, #{depositMoneyAmount,jdbcType=INTEGER}, #{cityBegin,jdbcType=VARCHAR}, 
-      #{cityEnd,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR}, #{cargoCarType,jdbcType=VARCHAR}, 
-      #{cargoCarLength,jdbcType=VARCHAR}, #{depositMoneyInfo,jdbcType=VARCHAR}, #{freightMoneyInfo,jdbcType=VARCHAR}, 
+    insert into im_trade_card_status (order_id, cargo_id, consignor_user_id, driver_user_id,
+      deposit_money_amount, city_begin, city_end, cargo_weight,
+      cargo_capacity, cargo_car_type, cargo_car_length, deposit_money_info,
+      order_status_info, order_status, upload_receipt, freight_money_info, contract_status_info,
+      way_status_info, trade_type_info, change_module, changed_status,
+      freight_money_count, raw_status_update_time, create_time,update_time)
+    values (#{orderId,jdbcType=BIGINT}, #{cargoId,jdbcType=BIGINT}, #{consignorUserId,jdbcType=BIGINT}, #{driverUserId,jdbcType=BIGINT},
+      #{depositMoneyAmount,jdbcType=INTEGER}, #{cityBegin,jdbcType=VARCHAR}, #{cityEnd,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR},
+      #{cargoCapacity,jdbcType=VARCHAR}, #{cargoCarType,jdbcType=VARCHAR}, #{cargoCarLength,jdbcType=VARCHAR}, #{depositMoneyInfo,jdbcType=VARCHAR},
+      #{orderStatusInfo,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, #{uploadReceipt,jdbcType=INTEGER}, #{freightMoneyInfo,jdbcType=VARCHAR},
       #{contractStatusInfo,jdbcType=VARCHAR}, #{wayStatusInfo,jdbcType=VARCHAR}, #{lastGuideStepTradeRawStatusITradeType,jdbcType=VARCHAR}, 
       #{lastGuidStepTradeRawStatusTradeTChangeModule,jdbcType=VARCHAR}, #{lastGuidStepTradeRawStatusTradeTChangedStatus,jdbcType=VARCHAR}, 
       #{freightMoneyCount,jdbcType=INTEGER}, #{lastGuidStepTradeRawStatusUpdateTime,jdbcType=BIGINT},
@@ -69,9 +67,13 @@
            city_begin = #{cityBegin,jdbcType=VARCHAR},
            city_end = #{cityEnd,jdbcType=VARCHAR},
            cargo_weight = #{cargoWeight,jdbcType=VARCHAR},
+           cargo_capacity = #{cargoCapacity,jdbcType=VARCHAR},
            cargo_car_type = #{cargoCarType,jdbcType=VARCHAR},
            cargo_car_length = #{cargoCarLength,jdbcType=VARCHAR},
            deposit_money_info = #{depositMoneyInfo,jdbcType=VARCHAR},
+           order_status_info = #{orderStatusInfo,jdbcType=VARCHAR},
+           order_status = #{orderStatus,jdbcType=INTEGER},
+           upload_receipt = #{uploadReceipt,jdbcType=INTEGER},
            freight_money_info = #{freightMoneyInfo,jdbcType=VARCHAR},
            contract_status_info = #{contractStatusInfo,jdbcType=VARCHAR},
            way_status_info = #{wayStatusInfo,jdbcType=VARCHAR},
