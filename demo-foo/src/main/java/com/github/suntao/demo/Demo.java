@@ -26,5 +26,8 @@ public class Demo {
         calendar.add(Calendar.MINUTE, -a);
         System.out.println(calendar.get(Calendar.HOUR_OF_DAY));
         System.out.println(Objects.equals(1, new Integer(1)));
+
+
+        System.out.println(new StringBuilder().toString());
     }
 }
