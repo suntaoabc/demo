@@ -1,9 +1,10 @@
 /**
- * ymm56.com Inc. Copyright (c) 2013-2018 All Rights Reserved.
+ * foo Copyright (c) 2013-2018 All Rights Reserved.
  */
 package com.github.suntao.demo.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import com.github.suntao.demo.dao.dataobject.TradeRawStatusDO;
@@ -22,7 +23,12 @@ public class TradeRawStatusRepo {
     private TradeRawStatusMapper tradeRawStatusMapper;
 
     public void saveTradeRawStatus(TradeRawStatusDO tradeRawStatusDO) {
+        try {
+            
         this.tradeRawStatusMapper.insert(tradeRawStatusDO);
+        } catch (DuplicateKeyException e) {
+            System.out.println("hahaha");
+        }
     }
 
     public TradeRawStatusDO findTradeRawStatusByOrderId(Long orderId) {

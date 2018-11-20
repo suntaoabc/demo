@@ -1,5 +1,5 @@
 /**
- * ymm56.com Inc. Copyright (c) 2013-2018 All Rights Reserved.
+ * foo Copyright (c) 2013-2018 All Rights Reserved.
  */
 package com.github.suntao.demo.configuration;
 
