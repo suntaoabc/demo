@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.suntao.demo.dao.mapper.TradeRawStatusMapper">
+  <resultMap id="BaseResultMap" type="com.github.suntao.demo.dao.dataobject.TradeRawStatusDO">
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="related_item_id" jdbcType="BIGINT" property="relatedItemId" />
+    <result column="related_table_name" jdbcType="VARCHAR" property="relatedTableName" />
+    <result column="turned_status" jdbcType="INTEGER" property="turnedStatus" />
+    <result column="trade_type" jdbcType="TINYINT" property="tradeType" />
+    <result column="related_item_update_time" jdbcType="BIGINT" property="relatedItemUpdateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    order_id, related_item_id, related_table_name, turned_status, trade_type, related_item_update_time
+  </sql>
+  <select id="findByOrderId" parameterType="long" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+      from im_trade_raw_status
+     where order_id=#{orderId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insert" parameterType="com.github.suntao.demo.dao.dataobject.TradeRawStatusDO">
+    insert into im_trade_raw_status (order_id, related_item_id, related_table_name,
+      turned_status, trade_type, related_item_update_time,create_time,update_time
+      )
+    values (#{orderId,jdbcType=BIGINT}, #{relatedItemId,jdbcType=BIGINT}, #{relatedTableName,jdbcType=VARCHAR},
+      #{turnedStatus,jdbcType=INTEGER}, #{tradeType,jdbcType=TINYINT}, #{relatedItemUpdateTime,jdbcType=BIGINT},now(),now()
+      )
+  </insert>
+
+  <update id="updateByExample" parameterType="com.github.suntao.demo.dao.dataobject.TradeRawStatusDO">
+    update im_trade_raw_status
+       set
+          <if test="relatedItemId != null">
+           related_item_id = #{relatedItemId,jdbcType=BIGINT},
+           </if>
+           <if test="relatedTableName != null">
+           related_table_name = #{relatedTableName,jdbcType=VARCHAR},
+           </if>
+           <if test="turnedStatus != null">
+           turned_status = #{turnedStatus,jdbcType=TINYINT},
+           </if>
+           <if test="tradeType != null">
+           trade_type = #{tradeType,jdbcType=TINYINT},
+           </if>
+           related_item_update_time = #{relatedItemUpdateTime,jdbcType=BIGINT},
+           update_time=now()
+    where order_id = #{orderId,jdbcType=BIGINT}
+      and related_item_update_time &lt; #{relatedItemUpdateTime,jdbcType=BIGINT}
+  </update>
+
+
+</mapper>

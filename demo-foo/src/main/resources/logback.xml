@@ -1,0 +1,22 @@
+<!-- debug="true" 控制是否打印logback内部状态，和statusListener可以二选一
+    scan="true"配置文件变动后，自己重新加载，ReconfigureOnChangeTask
+    scanPeriod="30 seconds"指定扫描周期，时间单位默认是milliseconds
+    java -Dlogback.statusListenerClass=ch.qos.logback.core.status.OnConsoleStatusListener
+-->
+<configuration debug="true" scan="true">
+    <!-- <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" /> -->
+    <!-- in the absence of the class attribute, assume
+   ch.qos.logback.core.hook.DefaultShutdownHook -->
+    <!--<shutdownHook/>-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

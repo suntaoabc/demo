@@ -1,11 +1,11 @@
 spring:
   application:
     name: demo-foo
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: demo-foo
-      enable-auto-commit: true
-      auto-offset-reset: latest
-    listener:
-      concurrency: 4
+  datasource:
+    username: root
+    password: tiger
+    url: jdbc:mysql://localhost:3306/answer
+    driver-class-name: com.mysql.jdbc.Driver
+debug: false
+server:
+  context-path: /foo
