@@ -1,14 +1,9 @@
 /**
- * foo
- * Copyright (c) 2013-2018 All Rights Reserved.
+ * foo Copyright (c) 2013-2018 All Rights Reserved.
  */
 package com.github.suntao.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Calendar;
-import java.util.Objects;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  *
@@ -18,16 +13,36 @@ import java.util.Objects;
 public class Demo {
 
     public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger(Demo.class);
-        logger.info("test");
-        int a = 30;
+        System.out.println(appVersionAfterMixtrade("6.10.0.0", "6.10.0"));
+    }
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -a);
-        System.out.println(calendar.get(Calendar.HOUR_OF_DAY));
-        System.out.println(Objects.equals(1, new Integer(1)));
+    public static boolean appVersionAfterMixtrade(String versionName, String target) {
+        String currentHcbVersion = versionName;
+        String[] currentHcbVersions = currentHcbVersion.split("\\.");/** 当前货车帮版本号 **/
 
-
-        System.out.println(new StringBuilder().toString());
+        String targetHcbVersion = target;
+        String[] targetHcbVersions = targetHcbVersion.split("\\.");/** 待比较的货车帮版本号 **/
+        int biaoji = 0;
+        String targetVersion = "";
+        for (String hcbVersion : currentHcbVersions) {
+            targetVersion = targetHcbVersions[biaoji];
+            if (NumberUtils.isDigits(hcbVersion) && NumberUtils.isDigits(targetVersion)) {
+                if (NumberUtils.toLong(hcbVersion) > NumberUtils.toLong(targetVersion)) {
+                    return true;
+                } else if (NumberUtils.toLong(hcbVersion) < NumberUtils.toLong(targetVersion)) {
+                    return false;
+                } else {
+                    // 相等时，继续判断下一个部分的数字
+                    biaoji++;
+                    if (biaoji == currentHcbVersions.length) {
+                        return true;
+                    }
+                    continue;
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }
